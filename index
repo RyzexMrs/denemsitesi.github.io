@@ -1,1 +1,107 @@
-anonymous
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seva Toxuma Sxemleri</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        nav {
+            margin: 20px 0;
+        }
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #4CAF50;
+        }
+        .content {
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #4CAF50;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        #loginForm {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 100px;
+        }
+        #loginForm input {
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+        }
+        #message {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Seva Toxuma Sxemleri</h1>
+</header>
+
+<nav>
+    <a href="#">Ana Sayfa</a>
+    <a href="#">Hakkında</a>
+    <a href="#">Toxuma Sxemleri</a>
+    <a href="#">Blog</a>
+    <a href="#">İletişim</a>
+</nav>
+
+<div class="content" id="protectedContent" style="display: none;">
+    <h2>Hoş Geldiniz!</h2>
+    <p>Seva Toxuma Sxemleri, farklı tohum türlerini ve yetiştirme yöntemlerini keşfetmek için bir kaynaktır.</p>
+    <p>Bu site, bahçıvanlar ve doğa severler için bilgi paylaşmayı amaçlamaktadır. Toxumalar hakkında daha fazla bilgi edinmek için sayfalarımızı gezebilirsiniz.</p>
+</div>
+
+<div id="loginForm">
+    <input type="password" id="password" placeholder="Şifrenizi Girin">
+    <button onclick="checkPassword()">Giriş</button>
+    <p id="message"></p>
+</div>
+
+<footer>
+    <p>&copy; 2024 Seva Toxuma Sxemleri. Tüm hakları saklıdır.</p>
+</footer>
+
+<script>
+    function checkPassword() {
+        const password = document.getElementById('password').value;
+        const message = document.getElementById('message');
+        const protectedContent = document.getElementById('protectedContent');
+
+        if (password === '1234seva') { // Şifre burada belirlenmiştir
+            protectedContent.style.display = 'block';
+            document.getElementById('loginForm').style.display = 'none';
+        } else {
+            message.textContent = 'Yanlış şifre, lütfen tekrar deneyin.';
+        }
+    }
+</script>
+
+</body>
+</html>
