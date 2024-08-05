@@ -76,6 +76,26 @@
             color: #4CAF50;
             font-weight: bold;
         }
+        /* Dəstək sayfasının stilleri */
+        .support-box {
+            border: 1px solid black; /* İnce siyah kenar */
+            border-radius: 10px;
+            padding: 20px;
+            width: 250px; /* Çerçeve genişliği */
+            margin: 20px auto; /* Ortalamak için */
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.9); /* Beyaz arka plan */
+        }
+        .support-link {
+            color: #4CAF50;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s, transform 0.3s; /* Animasyon efekti */
+        }
+        .support-link:hover {
+            color: #2e7d32;
+            transform: scale(1.1); /* Büyütme efekti */
+        }
     </style>
 </head>
 <body>
@@ -128,12 +148,33 @@
                         text-align: center;
                         padding: 50px;
                     }
+                    .support-box {
+                        border: 1px solid black; /* İnce siyah kenar */
+                        border-radius: 10px;
+                        padding: 20px;
+                        width: 250px; /* Çerçeve genişliği */
+                        margin: 0 auto; /* Ortalamak için */
+                        text-align: center;
+                        background-color: rgba(255, 255, 255, 0.9); /* Beyaz arka plan */
+                    }
+                    .support-link {
+                        color: #4CAF50;
+                        font-weight: bold;
+                        cursor: pointer;
+                        transition: color 0.3s, transform 0.3s; /* Animasyon efekti */
+                    }
+                    .support-link:hover {
+                        color: #2e7d32;
+                        transform: scale(1.1); /* Büyütme efekti */
+                    }
                 </style>
             </head>
             <body>
-                <h1>Dəstək</h1>
-                <p>Telegram: @byseva</p>
-                <p>Instagram: @byseva</p>
+                <div class="support-box">
+                    <h1>Dəstək</h1>
+                    <p class="support-link" onclick="window.open('https://t.me/byseva', '_blank')">Telegram: @byseva</p>
+                    <p class="support-link" onclick="window.open('https://www.instagram.com/byseva', '_blank')">Instagram: @byseva</p>
+                </div>
             </body>
             </html>
         `);
