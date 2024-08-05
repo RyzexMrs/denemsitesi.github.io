@@ -47,11 +47,36 @@
             flex-direction: column;
             align-items: center;
             margin-top: 100px;
+            background-color: #000000; /* Siyah arka plan */
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            width: 300px; /* Küçük boyut */
+            margin-left: auto; /* Ortalamak için */
+            margin-right: auto; /* Ortalamak için */
         }
         #loginForm input {
             margin: 10px 0;
             padding: 10px;
-            font-size: 16px;
+            font-size: 14px; /* Küçük yazı boyutu */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            background-color: #333; /* Koyu gri arka plan */
+            color: white; /* Beyaz yazı */
+        }
+        #loginForm button {
+            padding: 10px;
+            font-size: 14px; /* Küçük yazı boyutu */
+            color: white;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        #loginForm button:hover {
+            background-color: #45a049;
         }
         #message {
             color: red;
@@ -66,9 +91,7 @@
 
 <nav>
     <a href="#">Ana Sayfa</a>
-    <a href="#">Hakkında</a>
     <a href="#">Toxuma Sxemleri</a>
-    <a href="#">Blog</a>
     <a href="#">İletişim</a>
 </nav>
 
@@ -79,9 +102,16 @@
 </div>
 
 <div id="loginForm">
+    <h2 style="color: white;">Giriş Yap</h2> <!-- Beyaz başlık -->
     <input type="password" id="password" placeholder="Şifrenizi Girin">
     <button onclick="checkPassword()">Giriş</button>
     <p id="message"></p>
+</div>
+
+<div class="content" style="margin-top: 20px;">
+    <h2>İletişim</h2>
+    <p>Telegram: <a href="https://t.me/byseva" target="_blank">@byseva</a></p>
+    <p>Instagram: <a href="https://instagram.com/byseva" target="_blank">@byseva</a></p>
 </div>
 
 <footer>
@@ -101,6 +131,18 @@
             message.textContent = 'Yanlış şifre, lütfen tekrar deneyin.';
         }
     }
+
+    // Sağ tıklamayı engelle
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+    });
+
+    // Klavye kısayollarını engelle
+    document.addEventListener('keydown', function(e) {
+        if (e.ctrlKey && (e.key === 'c' || e.key === 'u' || e.key === 'i' || e.key === 's' || e.key === 'v')) {
+            e.preventDefault();
+        }
+    });
 </script>
 
 </body>
