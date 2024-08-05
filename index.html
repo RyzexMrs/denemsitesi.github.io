@@ -92,6 +92,11 @@
         <h1>Toxunma Sxemleri By Seva</h1>
     </header>
 
+    <nav>
+        <a href="#" onclick="openSupport()">Dəstək</a>
+        <a href="#" onclick="openSchemes()">Sxemler</a>
+    </nav>
+
     <div class="content">
         <h2>Xoş Gəlmisiniz!</h2>
         <p>Saytımız 7/24 aktivdir. Sxemlere baxmaq üçün "Sxem" yazısına klik edə bilərsiniz. Hər hansı bir problem yaşadıqda isə "İletişim" yazısına klik edərək bizimlə əlaqəyə keçə bilərsiniz.</p>
@@ -109,6 +114,53 @@
         } else {
             message.textContent = 'Yanlış şifre, lütfen tekrar deneyin.';
         }
+    }
+
+    function openSupport() {
+        const supportWindow = window.open('', '_blank'); // Yeni bir sekme aç
+        supportWindow.document.write(`
+            <html>
+            <head>
+                <title>Dəstək</title>
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        text-align: center;
+                        padding: 50px;
+                    }
+                </style>
+            </head>
+            <body>
+                <h1>Dəstək</h1>
+                <p>Telegram: @byseva</p>
+                <p>Instagram: @byseva</p>
+            </body>
+            </html>
+        `);
+        supportWindow.document.close(); // Yeni sekmeyi kapat
+    }
+
+    function openSchemes() {
+        const schemesWindow = window.open('', '_blank'); // Yeni bir sekme aç
+        schemesWindow.document.write(`
+            <html>
+            <head>
+                <title>Sxemler</title>
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        text-align: center;
+                        padding: 50px;
+                    }
+                </style>
+            </head>
+            <body>
+                <h1>Sxemler</h1>
+                <p>Sxemler burada göstəriləcəkdir.</p>
+            </body>
+            </html>
+        `);
+        schemesWindow.document.close(); // Yeni sekmeyi kapat
     }
 
     // Sağ tıklamayı engelle
