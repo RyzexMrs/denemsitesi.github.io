@@ -27,6 +27,7 @@
             padding: 20px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
             width: 300px; /* Küçük boyut */
+            transition: opacity 0.5s ease; /* Geçiş efekti */
         }
         #loginForm input {
             margin: 10px 0;
@@ -54,6 +55,27 @@
         #message {
             color: red;
         }
+        #homePage {
+            display: none; /* Başlangıçta gizli */
+            flex-direction: column;
+            align-items: center;
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            width: 80%; /* İçerik alanı */
+            max-width: 600px; /* Maksimum genişlik */
+        }
+        nav {
+            margin: 20px 0;
+            text-align: center;
+        }
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #4CAF50;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -65,13 +87,32 @@
     <p id="message"></p>
 </div>
 
+<div id="homePage">
+    <header>
+        <h1>Seva Toxuma Sxemleri</h1>
+    </header>
+
+    <nav>
+        <a href="#">Ana Sayfa</a>
+        <a href="#">İletişim</a>
+        <a href="#">Sxemler</a>
+    </nav>
+
+    <div class="content">
+        <h2>Hoş Geldiniz!</h2>
+        <p>Seva Toxuma Sxemleri, farklı tohum türlerini ve yetiştirme yöntemlerini keşfetmek için bir kaynaktır.</p>
+        <p>Bahçıvanlar ve doğa severler için bilgi paylaşmayı amaçlamaktadır. Toxumalar hakkında daha fazla bilgi edinmek için sayfalarımızı gezebilirsiniz.</p>
+    </div>
+</div>
+
 <script>
     function checkPassword() {
         const password = document.getElementById('password').value;
         const message = document.getElementById('message');
 
         if (password === '1234seva') { // Şifre burada belirlenmiştir
-            alert('Giriş başarılı!'); // Başarılı giriş mesajı
+            document.getElementById('loginForm').style.display = 'none'; // Giriş formunu gizle
+            document.getElementById('homePage').style.display = 'flex'; // Ana sayfayı göster
         } else {
             message.textContent = 'Yanlış şifre, lütfen tekrar deneyin.';
         }
