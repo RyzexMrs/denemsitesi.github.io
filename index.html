@@ -78,10 +78,15 @@
         }
         /* Dəstək sayfasının stilleri */
         .support-box {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             border: 1px solid black; /* İnce siyah kenar */
             border-radius: 10px;
             padding: 20px;
-            width: 250px; /* Çerçeve genişliği */
+            width: 400px; /* Çerçeve genişliği */
+            max-width: 90%; /* Maksimum genişlik */
             margin: 20px auto; /* Ortalamak için */
             text-align: center;
             background-color: rgba(255, 255, 255, 0.9); /* Beyaz arka plan */
@@ -145,15 +150,23 @@
                 <style>
                     body {
                         font-family: Arial, sans-serif;
-                        text-align: center;
-                        padding: 50px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        height: 100vh; /* Dikey ortalama */
+                        background-color: rgba(244, 244, 244, 0.8); /* Arka plan rengi */
                     }
                     .support-box {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
                         border: 1px solid black; /* İnce siyah kenar */
                         border-radius: 10px;
                         padding: 20px;
-                        width: 250px; /* Çerçeve genişliği */
-                        margin: 0 auto; /* Ortalamak için */
+                        width: 400px; /* Çerçeve genişliği */
+                        max-width: 90%; /* Maksimum genişlik */
+                        margin: 20px auto; /* Ortalamak için */
                         text-align: center;
                         background-color: rgba(255, 255, 255, 0.9); /* Beyaz arka plan */
                     }
@@ -211,11 +224,4 @@
 
     // Klavye kısayollarını engelle
     document.addEventListener('keydown', function(e) {
-        if (e.ctrlKey && (e.key === 'c' || e.key === 'u' || e.key === 'i' || e.key === 's' || e.key === 'v')) {
-            e.preventDefault();
-        }
-    });
-</script>
-
-</body>
-</html>
+        if (e.ctrlKey && (e.key === 'c' || e.key === 'u' || e.key
