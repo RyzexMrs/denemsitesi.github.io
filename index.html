@@ -76,26 +76,6 @@
             color: #4CAF50;
             font-weight: bold;
         }
-        /* Dəstək sayfasının stilleri */
-        .support-box {
-            border: 1px solid black; /* İnce siyah kenar */
-            border-radius: 10px;
-            padding: 20px;
-            width: 250px; /* Çerçeve genişliği */
-            margin: 20px auto; /* Ortalamak için */
-            text-align: center;
-            background-color: rgba(255, 255, 255, 0.9); /* Beyaz arka plan */
-        }
-        .support-link {
-            color: #4CAF50;
-            font-weight: bold;
-            cursor: pointer;
-            transition: color 0.3s, transform 0.3s; /* Animasyon efekti */
-        }
-        .support-link:hover {
-            color: #2e7d32;
-            transform: scale(1.1); /* Büyütme efekti */
-        }
     </style>
 </head>
 <body>
@@ -103,7 +83,7 @@
 <div id="loginForm">
     <h2 style="color: white;">Giriş Yap</h2> <!-- Beyaz başlık -->
     <input type="password" id="password" placeholder="Şifrenizi Girin">
-    <button onclick="checkPassword()">Giriş</button>
+    <button id="loginButton">Giriş</button>
     <p id="message"></p>
 </div>
 
@@ -113,7 +93,6 @@
     </header>
 
     <nav>
-        <a href="#" onclick="openSupport()">Dəstək</a>
         <a href="#" onclick="openSchemes()">Sxemler</a>
     </nav>
 
@@ -124,6 +103,8 @@
 </div>
 
 <script>
+    document.getElementById('loginButton').addEventListener('click', checkPassword);
+
     function checkPassword() {
         const password = document.getElementById('password').value;
         const message = document.getElementById('message');
@@ -134,51 +115,6 @@
         } else {
             message.textContent = 'Yanlış şifre, lütfen tekrar deneyin.';
         }
-    }
-
-    function openSupport() {
-        const supportWindow = window.open('', '_blank'); // Yeni bir sekme aç
-        supportWindow.document.write(`
-            <html>
-            <head>
-                <title>Dəstək</title>
-                <style>
-                    body {
-                        font-family: Arial, sans-serif;
-                        text-align: center;
-                        padding: 50px;
-                    }
-                    .support-box {
-                        border: 1px solid black; /* İnce siyah kenar */
-                        border-radius: 10px;
-                        padding: 20px;
-                        width: 250px; /* Çerçeve genişliği */
-                        margin: 0 auto; /* Ortalamak için */
-                        text-align: center;
-                        background-color: rgba(255, 255, 255, 0.9); /* Beyaz arka plan */
-                    }
-                    .support-link {
-                        color: #4CAF50;
-                        font-weight: bold;
-                        cursor: pointer;
-                        transition: color 0.3s, transform 0.3s; /* Animasyon efekti */
-                    }
-                    .support-link:hover {
-                        color: #2e7d32;
-                        transform: scale(1.1); /* Büyütme efekti */
-                    }
-                </style>
-            </head>
-            <body>
-                <div class="support-box">
-                    <h1>Dəstək</h1>
-                    <p class="support-link" onclick="window.open('https://t.me/byseva', '_blank')">Telegram: @byseva</p>
-                    <p class="support-link" onclick="window.open('https://www.instagram.com/byseva', '_blank')">Instagram: @byseva</p>
-                </div>
-            </body>
-            </html>
-        `);
-        supportWindow.document.close(); // Yeni sekmeyi kapat
     }
 
     function openSchemes() {
