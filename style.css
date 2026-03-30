@@ -1,0 +1,29 @@
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #000; /* Derin siyah arka plan */
+    overflow: hidden; /* Kaydırma çubuklarını gizle */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+canvas {
+    display: block;
+    /* Hafif bir dış parıltı da CSS ile ekleyelim */
+    filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.7));
+}
+
+/* Eğer not eklediysen onun stili */
+.message {
+    position: absolute;
+    bottom: 50px;
+    color: white;
+    font-family: 'Arial', sans-serif;
+    font-size: 24px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    letter-spacing: 2px;
+}
