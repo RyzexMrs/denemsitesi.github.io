@@ -3,12 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jessy</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Himm</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: linear-gradient(135deg, #ffafbd 0%, #ffc3a0 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Arka plan kalpler */
+        .heart {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 20px;
+            animation: move 5s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes move {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+        .container {
+            text-align: center;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 40px;
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .bear-container {
+            font-size: 100px;
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: bounce 2s infinite ease-in-out;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .message-box {
+            background: white;
+            padding: 20px 40px;
+            border-radius: 50px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            display: inline-block;
+            position: relative;
+        }
+
+        .message-box::after {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 15px solid white;
+        }
+
+        h1 {
+            color: #d63384;
+            margin: 0;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+        }
+
+        p {
+            color: #666;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-    <canvas id="heartCanvas"></canvas>
-    
-    <script src="script.js"></script>
+
+    <div class="container">
+        <div class="bear-container">
+            🧸
+        </div>
+        <br>
+        <div class="message-box">
+            <h1>Aydan Barışağ?</h1>
+        </div>
+        <p>He??</p>
+    </div>
+
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            heart.style.fontSize = Math.random() * 20 + 15 + 'px';
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        setInterval(createHeart, 300);
+    </script>
 </body>
 </html>
