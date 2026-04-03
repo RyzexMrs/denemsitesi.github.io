@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jessy</title>
+    <title>Gecen Xeyre Gözelim - Şahşalı Kedi</title>
     <style>
         body {
             margin: 0;
             padding: 0;
             overflow: hidden; /* Taşmaları gizle */
-            background: linear-gradient(to bottom right, #ffdde1, #ee9ca7); /* Yumuşak pembe geçiş */
+            /* Sürekli değişen, çok renkli ve canlı gradient arka plan */
+            background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fad0c4, #ffd1ff, #a18cd1, #fbc2eb);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             justify-content: center;
@@ -17,22 +20,29 @@
             height: 100vh;
         }
 
-        /* Arka plan kalpler animasyonu */
+        /* Arka plan renk geçişi animasyonu */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Arka plan kalpler animasyonu - Daha parlak ve çok renkli */
         .heart {
             position: absolute;
-            color: rgba(255, 105, 180, 0.6); /* Şeffaf pembe kalpler */
-            font-size: 1.5rem;
-            animation: moveHearts 4s linear infinite;
+            font-size: 1.8rem;
+            animation: moveHearts 5s linear infinite;
             pointer-events: none; /* Kalpler fare etkileşimini engellemesin */
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8)); /* Parlama efekti */
         }
 
         @keyframes moveHearts {
             0% {
                 transform: translateY(110vh) translateX(0px) rotate(0deg);
-                opacity: 0.8;
+                opacity: 0.9;
             }
             100% {
-                transform: translateY(-10vh) translateX(50px) rotate(360deg);
+                transform: translateY(-10vh) translateX(100px) rotate(360deg);
                 opacity: 0;
             }
         }
@@ -44,65 +54,70 @@
             text-align: center;
         }
 
-        /* Kedi ve Balon Kombinasyonu */
+        /* Kedi ve Balon Kombinasyonu - Daha büyük ve belirgin */
         .cat-balloon-box {
             position: relative;
             display: inline-block;
-            animation: floatCat 3s infinite ease-in-out;
+            animation: floatCat 4s infinite ease-in-out;
+            transform-origin: bottom center; /* Dönme noktası */
         }
 
-        /* Kedi Emojisi */
+        /* Kedi Emojisi - Daha büyük ve parlak */
         .cat-emoji {
-            font-size: 8rem;
+            font-size: 12rem; /* Daha şahşalı bir boyut */
             display: block;
+            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3)); /* Gölge efekti */
         }
 
-        /* Balon */
+        /* Balon - Daha parlak, renk geçişli ve ışıltılı */
         .balloon {
             position: absolute;
             bottom: 100%; /* Kedinin üstünde başla */
             left: 50%;
-            transform: translateX(-50%) translateY(-20px);
-            background-color: #ff6b6b; /* Canlı kırmızı */
-            padding: 15px 25px;
-            border-radius: 50%; /* Yuvarlak balon */
-            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+            transform: translateX(-50%) translateY(-30px);
+            /* Canlı kırmızıdan pembeye geçişli balon */
+            background: linear-gradient(135deg, #ff6b6b, #ff9a9e);
+            padding: 20px 35px;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; /* Daha gerçekçi balon şekli */
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.5), inset 0 -5px 10px rgba(0, 0, 0, 0.2); /* Dış ve iç gölge */
             white-space: nowrap; /* Yazının tek satırda kalmasını sağla */
-            animation: inflateBalloon 0.5s ease-out forwards;
+            animation: inflateBalloon 0.7s ease-out forwards;
+            border: 2px solid rgba(255, 255, 255, 0.4); /* İnce beyaz kenarlık */
         }
 
         /* Balon Kuyruğu (İpi) */
         .balloon::after {
             content: '';
             position: absolute;
-            bottom: -15px;
+            bottom: -20px;
             left: 50%;
             transform: translateX(-50%);
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-top: 15px solid #ff6b6b;
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-top: 18px solid #ff6b6b;
         }
 
-        /* Balon Üzerindeki Yazı */
+        /* Balon Üzerindeki Yazı - Daha büyük, beyaz ve gölgeli */
         .balloon-text {
             color: white;
-            font-size: 1.2rem;
+            font-size: 1.6rem;
             font-weight: bold;
             margin: 0;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4); /* Güçlü gölge */
+            letter-spacing: 1px;
         }
 
-        /* Kedi Yüzme Animasyonu */
+        /* Kedi Yüzme ve Dönme Animasyonu - Daha karmaşık ve şahşalı */
         @keyframes floatCat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+            0%, 100% { transform: translateY(0) rotate(-2deg); }
+            50% { transform: translateY(-25px) rotate(2deg); }
         }
 
         /* Balon Şişme Animasyonu */
         @keyframes inflateBalloon {
-            0% { transform: translateX(-50%) translateY(-20px) scale(0); opacity: 0; }
-            80% { transform: translateX(-50%) translateY(-20px) scale(1.1); opacity: 1; }
-            100% { transform: translateX(-50%) translateY(-20px) scale(1); }
+            0% { transform: translateX(-50%) translateY(-30px) scale(0); opacity: 0; }
+            80% { transform: translateX(-50%) translateY(-30px) scale(1.15); opacity: 1; }
+            100% { transform: translateX(-50%) translateY(-30px) scale(1); }
         }
 
     </style>
@@ -119,25 +134,30 @@
     </div>
 
     <script>
-        // Arka planda süzülen kalpleri oluşturan fonksiyon
+        // Arka planda süzülen çok renkli kalpleri oluşturan fonksiyon
         function createHearts() {
             const heart = document.createElement('div');
             heart.classList.add('heart');
             heart.innerHTML = '❤️'; // Kalp emojisi
+            
+            // Rastgele renk seçimi
+            const colors = ['#ff6b6b', '#ff9a9e', '#ffd1ff', '#a18cd1', '#fbc2eb', '#ffffff'];
+            heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+            
             heart.style.left = Math.random() * 100 + 'vw'; // Rastgele yatay pozisyon
-            heart.style.animationDuration = Math.random() * 3 + 3 + 's'; // Rastgele hız
-            heart.style.fontSize = Math.random() * 1.5 + 1 + 'rem'; // Rastgele boyut
+            heart.style.animationDuration = Math.random() * 4 + 4 + 's'; // Rastgele hız
+            heart.style.fontSize = Math.random() * 2 + 1.2 + 'rem'; // Rastgele boyut
             
             document.body.appendChild(heart);
 
             // Kalbi ekran dışına çıkınca kaldır
             setTimeout(() => {
                 heart.remove();
-            }, 6000);
+            }, 7000);
         }
 
         // Belirli aralıklarla yeni kalpler oluştur
-        setInterval(createHearts, 250); // Her 250ms'de bir kalp
+        setInterval(createHearts, 150); // Daha sık kalp (daha şahşalı)
     </script>
 </body>
 </html>
