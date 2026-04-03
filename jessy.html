@@ -161,3 +161,130 @@
     </script>
 </body>
 </html>
+}
+
+        @keyframes moveHearts {
+            0% {
+                transform: translateY(110vh) translateX(0px) rotate(0deg);
+                opacity: 0.9;
+            }
+            100% {
+                transform: translateY(-10vh) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Ana içerik kapsayıcısı */
+        .container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+        }
+
+        /* Kedi ve Balon Kombinasyonu - Daha büyük ve belirgin */
+        .cat-balloon-box {
+            position: relative;
+            display: inline-block;
+            animation: floatCat 4s infinite ease-in-out;
+            transform-origin: bottom center; /* Dönme noktası */
+        }
+
+        /* Kedi Emojisi - Daha büyük ve parlak */
+        .cat-emoji {
+            font-size: 12rem; /* Daha şahşalı bir boyut */
+            display: block;
+            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3)); /* Gölge efekti */
+        }
+
+        /* Balon - Daha parlak, renk geçişli ve ışıltılı */
+        .balloon {
+            position: absolute;
+            bottom: 100%; /* Kedinin üstünde başla */
+            left: 50%;
+            transform: translateX(-50%) translateY(-30px);
+            /* Canlı kırmızıdan pembeye geçişli balon */
+            background: linear-gradient(135deg, #ff6b6b, #ff9a9e);
+            padding: 20px 35px;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; /* Daha gerçekçi balon şekli */
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.5), inset 0 -5px 10px rgba(0, 0, 0, 0.2); /* Dış ve iç gölge */
+            white-space: nowrap; /* Yazının tek satırda kalmasını sağla */
+            animation: inflateBalloon 0.7s ease-out forwards;
+            border: 2px solid rgba(255, 255, 255, 0.4); /* İnce beyaz kenarlık */
+        }
+
+        /* Balon Kuyruğu (İpi) */
+        .balloon::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-top: 18px solid #ff6b6b;
+        }
+
+        /* Balon Üzerindeki Yazı - Daha büyük, beyaz ve gölgeli */
+        .balloon-text {
+            color: white;
+            font-size: 1.6rem;
+            font-weight: bold;
+            margin: 0;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4); /* Güçlü gölge */
+            letter-spacing: 1px;
+        }
+
+        /* Kedi Yüzme ve Dönme Animasyonu - Daha karmaşık ve şahşalı */
+        @keyframes floatCat {
+            0%, 100% { transform: translateY(0) rotate(-2deg); }
+            50% { transform: translateY(-25px) rotate(2deg); }
+        }
+
+        /* Balon Şişme Animasyonu */
+        @keyframes inflateBalloon {
+            0% { transform: translateX(-50%) translateY(-30px) scale(0); opacity: 0; }
+            80% { transform: translateX(-50%) translateY(-30px) scale(1.15); opacity: 1; }
+            100% { transform: translateX(-50%) translateY(-30px) scale(1); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="cat-balloon-box">
+            <div class="balloon">
+                <p class="balloon-text">Gecen Xeyre Gözelim</p>
+            </div>
+            <div class="cat-emoji">🐱</div>
+        </div>
+    </div>
+
+    <script>
+        // Arka planda süzülen çok renkli kalpleri oluşturan fonksiyon
+        function createHearts() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️'; // Kalp emojisi
+            
+            // Rastgele renk seçimi
+            const colors = ['#ff6b6b', '#ff9a9e', '#ffd1ff', '#a18cd1', '#fbc2eb', '#ffffff'];
+            heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+            
+            heart.style.left = Math.random() * 100 + 'vw'; // Rastgele yatay pozisyon
+            heart.style.animationDuration = Math.random() * 4 + 4 + 's'; // Rastgele hız
+            heart.style.fontSize = Math.random() * 2 + 1.2 + 'rem'; // Rastgele boyut
+            
+            document.body.appendChild(heart);
+
+            // Kalbi ekran dışına çıkınca kaldır
+            setTimeout(() => {
+                heart.remove();
+            }, 7000);
+        }
+
+        // Belirli aralıklarla yeni kalpler oluştur
+        setInterval(createHearts, 150); // Daha sık kalp (daha şahşalı)
+    </script>
+</body>
+</html>
