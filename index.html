@@ -12,72 +12,104 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: #0a0a0a; /* Derin siyah neon için */
+            background: #050505; /* Daha derin siyah, neonlar patlasın diye */
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow: hidden;
+            overflow: hidden; /* Kalpler dışarı taşmasın */
         }
 
-        /* Arka Plan Neon Kalpler */
+        /* ARKA PLAN: Sonsuz ve Yoğun Neon Kalpler */
+        .heart-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Kalplere tıklanmasın */
+            z-index: 1;
+        }
+
         .heart {
             position: absolute;
-            color: #bc13fe;
-            text-shadow: 0 0 10px #bc13fe, 0 0 20px #7a0bc0;
-            font-size: 20px;
-            pointer-events: none;
-            animation: moveUp 5s linear infinite;
+            font-size: 1.5rem; /* Kalp boyutu */
+            animation: drift 5s linear infinite; /* Sonsuz döngü */
+            opacity: 0;
+            filter: drop-shadow(0 0 5px rgba(188, 19, 254, 0.8)); /* Neon parlama */
         }
 
-        @keyframes moveUp {
-            0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
-            50% { opacity: 0.8; }
-            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        @keyframes drift {
+            0% {
+                transform: translateY(110vh) translateX(0px) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 0.8; } /* Belirme */
+            90% { opacity: 0.8; } /* Kaybolmadan hemen önce */
+            100% {
+                transform: translateY(-10vh) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
         }
 
-        /* Ana Çerçeve */
+        /* Ana Çerçeve - Dizaynı Değişmedi, Sadece Neon Güçlendirildi */
         .frame {
             position: relative;
             width: 320px;
-            background: rgba(20, 20, 20, 0.8);
+            background: rgba(10, 10, 10, 0.9); /* Arkayı hafif gösteren cam efekti */
             padding: 30px;
             border-radius: 20px;
             text-align: center;
-            z-index: 100;
-            /* Neon Hareketli Kenarlık */
-            box-shadow: 0 0 20px #bc13fe;
+            z-index: 100; /* Çerçeve kalplerin üstünde kalsın */
+            box-shadow: 0 0 30px #bc13fe, inset 0 0 10px rgba(188, 19, 254, 0.3); /* Dış ve iç neon */
             border: 2px solid #bc13fe;
+            backdrop-filter: blur(5px); /* Cam efekti */
         }
 
-        .user-photo {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            border: 2px solid #fff;
+        /* Minnoş Şekil - Yuvarlak ve Işıltılı */
+        .minno-shape {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4); /* Tatlış pembe geçiş */
+            border-radius: 50%; /* Yuvarlak (Minnoş) */
+            margin: 0 auto 25px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 5rem;
+            color: white;
+            box-shadow: 0 0 20px #fff, 0 0 40px #ff9a9e; /* Beyaz ve pembe parlama */
+            border: 4px solid #fff;
+            animation: pulse 2s infinite ease-in-out; /* Hafif nefes alma animasyonu */
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 20px #fff, 0 0 40px #ff9a9e; }
+            50% { transform: scale(1.05); box-shadow: 0 0 30px #fff, 0 0 60px #ff9a9e; }
         }
 
         h2 {
             color: white;
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            text-shadow: 0 0 10px #bc13fe;
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            text-shadow: 0 0 10px #bc13fe, 0 0 5px #fff;
         }
 
         .btn {
-            background: #bc13fe;
+            background: transparent;
             color: white;
-            border: none;
-            padding: 12px 25px;
+            border: 2px solid #bc13fe;
+            padding: 12px 30px;
             border-radius: 25px;
             cursor: pointer;
             font-weight: bold;
-            box-shadow: 0 0 15px #bc13fe;
-            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 15px rgba(188, 19, 254, 0.5);
+            transition: 0.3s ease;
         }
 
         .btn:hover {
-            transform: scale(1.1);
-            background: #ff00de;
+            background: #bc13fe;
+            box-shadow: 0 0 30px #bc13fe;
+            transform: scale(1.05);
         }
 
         /* Modal / Gizli Bölümler */
@@ -85,32 +117,34 @@
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95);
+            background: rgba(0,0,0,0.98); /* Daha koyu arka plan */
             justify-content: center;
             align-items: center;
             z-index: 200;
         }
 
         .yox-btn {
-            background: #444;
-            position: relative;
+            background: #333;
+            border: 2px solid #444;
+            box-shadow: none;
         }
 
         .final-text {
             color: #ff00de;
-            font-size: 1.4rem;
+            font-size: 1.6rem;
             text-align: center;
-            line-height: 1.5;
-            text-shadow: 0 0 10px #ff00de;
+            line-height: 1.6;
+            text-shadow: 0 0 15px #ff00de, 0 0 5px #fff;
         }
     </style>
 </head>
 <body>
 
-    <div id="heart-box"></div>
+    <div class="heart-container" id="heartBox"></div>
 
     <div class="frame" id="screen1">
-        <img src="https://i.ibb.co/FbMjZyLn/image.png" class="user-photo" alt="Gözəlim">
+        <div class="minno-shape">
+            <span>💖</span> </div>
         <h2>Sene soyuğ davrandığım üçün bağışla</h2>
         <button class="btn" onclick="goStep2()">Buna Bas</button>
     </div>
@@ -118,7 +152,7 @@
     <div class="hidden-section" id="screen2">
         <div class="frame">
             <h2>Bağışladın?</h2>
-            <div style="display:flex; gap:10px; justify-content:center;">
+            <div style="display:flex; gap:15px; justify-content:center;">
                 <button class="btn" onclick="goFinal()">He</button>
                 <button class="btn yox-btn" id="yoxBtn" onmouseover="escape()">Yox</button>
             </div>
@@ -129,23 +163,36 @@
         <div class="frame">
             <div class="final-text">
                 Teşekkürler Yaxşıkı varsan 💞<br>
-                <span style="font-size: 1rem; color: #888;">(birde küs yatma)</span>
+                <span style="font-size: 1.1rem; color: #aaa;">(birde küs yatma)</span>
             </div>
         </div>
     </div>
 
     <script>
-        // Arka plan kalpleri oluştur
-        function createHeart() {
+        // Arka plan kalpleri oluştur (Sonsuz ve Yoğun)
+        function createHearts() {
+            const container = document.getElementById('heartBox');
             const heart = document.createElement('div');
             heart.className = 'heart';
-            heart.innerHTML = '💜';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
-            document.getElementById('heart-box').appendChild(heart);
+            
+            // Rastgele neon renk seçimi
+            const colors = ['#bc13fe', '#ff00de', '#7a0bc0', '#ff9a9e', '#ffffff'];
+            heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+            
+            heart.innerHTML = '💜'; // Kalp semojisi
+            
+            heart.style.left = Math.random() * 100 + 'vw'; // Rastgele yatay pozisyon
+            heart.style.animationDuration = (Math.random() * 3 + 2) + 's'; // Rastgele hız
+            heart.style.fontSize = (Math.random() * 1 + 1) + 'rem'; // Rastgele boyut
+            
+            container.appendChild(heart);
+            
+            // Kalbi ekran dışına çıkınca kaldır
             setTimeout(() => heart.remove(), 5000);
         }
-        setInterval(createHeart, 200);
+        
+        // Çok daha sık kalp oluştur (Daha yoğun görünüm için)
+        setInterval(createHearts, 100); // Her 100ms'de bir kalp (sonsuz)
 
         // Ekran geçişleri
         function goStep2() {
@@ -170,7 +217,7 @@
             btn.innerText = "Error 404! 🤣";
         }
 
-        // Sağ tık engelleme
+        // Sağ tık engelleme (Pro koruma)
         document.addEventListener('contextmenu', e => e.preventDefault());
     </script>
 </body>
