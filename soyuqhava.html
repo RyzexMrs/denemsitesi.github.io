@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bağışla...</title>
+    <style>
+        :root {
+            --neon-color: #bc13fe;
+            --secondary-glow: #7a0bc0;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #050505;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            perspective: 1000px;
+        }
+
+        /* Neon Kalp Arkaplanı */
+        .neon-heart {
+            position: absolute;
+            font-size: 20px;
+            color: var(--neon-color);
+            text-shadow: 0 0 10px var(--neon-color), 0 0 20px var(--secondary-glow);
+            opacity: 0.6;
+            animation: drift 6s linear infinite;
+        }
+
+        @keyframes drift {
+            0% { transform: translateY(110vh) scale(0.5); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+        }
+
+        /* Neon Çerçeve */
+        .glass-card {
+            position: relative;
+            width: 350px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
+
+        /* Çerçeve Kenar Işığı */
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: 2px solid transparent;
+            border-image: linear-gradient(90deg, transparent, var(--neon-color), transparent);
+            border-image-slice: 1;
+            animation: borderRotate 3s linear infinite;
+        }
+
+        @keyframes borderRotate {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        .cat-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            border: 3px solid var(--neon-color);
+            box-shadow: 0 0 20px var(--neon-color);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        h2 {
+            color: #fff;
+            font-size: 1.5rem;
+            text-shadow: 0 0 10px var(--neon-color);
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            background: transparent;
+            color: white;
+            border: 2px solid var(--neon-color);
+            padding: 12px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 0 15px var(--secondary-glow);
+        }
+
+        .btn:hover {
+            background: var(--neon-color);
+            box-shadow: 0 0 30px var(--neon-color);
+        }
+
+        /* Modal Yapısı */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        #yox-btn {
+            position: relative;
+        }
+
+        .final-message {
+            display: none;
+            color: #ff00de;
+            font-size: 1.8rem;
+            text-align: center;
+            animation: fadeIn 1s;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+    <div id="heart-container"></div>
+
+    <div class="glass-card" id="main-card">
+        <img src="https://placecats.com/300/300" alt="Cute Cat" class="cat-img">
+        <h2>Sene soyuğ davrandığım üçün bağışla</h2>
+        <button class="btn" onclick="openModal()">Buna Bas</button>
+    </div>
+
+    <div class="modal" id="questionModal">
+        <div class="glass-card">
+            <h2>Bağışladın?</h2>
+            <div class="btn-group">
+                <button class="btn" onclick="showFinal()">He</button>
+                <button class="btn" id="yox-btn" onmouseover="moveButton()">Yox</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="finalModal">
+        <div class="glass-card">
+            <div class="final-message" id="finalText">
+                Teşekkürler Yaxşıkı varsan 💞 <br>
+                <small style="font-size: 1rem; color: #aaa;">(birde küs yatma)</small>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Neon Kalpler Oluşturma
+        const container = document.getElementById('heart-container');
+        const heartIcons = ['💜', '💖', '✨', '🌸'];
+        
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'neon-heart';
+            heart.innerText = heartIcons[Math.floor(Math.random() * heartIcons.length)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            container.appendChild(heart);
+            setTimeout(() => heart.remove(), 6000);
+        }
+        setInterval(createHeart, 200);
+
+        // Modal 
+        function openModal() {
+            document.getElementById('questionModal').style.display = 'flex';
+        }
+
+        function showFinal() {
+            document.getElementById('questionModal').style.display = 'none';
+            document.getElementById('finalModal').style.display = 'flex';
+            document.getElementById('finalText').style.display = 'block';
+        }
+
+        // (Yox)
+        function moveButton() {
+            const btn = document.getElementById('yox-btn');
+            const x = Math.random() * (window.innerWidth - btn.clientWidth) - (window.innerWidth / 2);
+            const y = Math.random() * (window.innerHeight - btn.clientHeight) - (window.innerHeight / 2);
+            
+            btn.style.transform = `translate(${x}px, ${y}px)`;
+            btn.innerText = "Error 404! ";
+        }
+    </script>
+</body>
+      </html>
+      
