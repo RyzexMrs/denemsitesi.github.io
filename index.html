@@ -1,122 +1,178 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="az">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Himm</title>
+    <title>Bağışla...</title>
     <style>
         body {
             margin: 0;
             padding: 0;
-            overflow: hidden;
-            background: linear-gradient(135deg, #ffafbd 0%, #ffc3a0 100%);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            background: #0a0a0a; /* Derin siyah neon için */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
         }
 
-        /* Arka plan kalpler */
+        /* Arka Plan Neon Kalpler */
         .heart {
             position: absolute;
-            color: rgba(255, 255, 255, 0.7);
+            color: #bc13fe;
+            text-shadow: 0 0 10px #bc13fe, 0 0 20px #7a0bc0;
             font-size: 20px;
-            animation: move 5s linear infinite;
             pointer-events: none;
+            animation: moveUp 5s linear infinite;
         }
 
-        @keyframes move {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+        @keyframes moveUp {
+            0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+            50% { opacity: 0.8; }
             100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
         }
 
-        .container {
+        /* Ana Çerçeve */
+        .frame {
+            position: relative;
+            width: 320px;
+            background: rgba(20, 20, 20, 0.8);
+            padding: 30px;
+            border-radius: 20px;
             text-align: center;
-            z-index: 10;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 40px;
-            border-radius: 30px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            z-index: 100;
+            /* Neon Hareketli Kenarlık */
+            box-shadow: 0 0 20px #bc13fe;
+            border: 2px solid #bc13fe;
         }
 
-        .bear-container {
-            font-size: 100px;
+        .user-photo {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 15px;
             margin-bottom: 20px;
-            display: inline-block;
-            animation: bounce 2s infinite ease-in-out;
+            border: 2px solid #fff;
         }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+        h2 {
+            color: white;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #bc13fe;
         }
 
-        .message-box {
-            background: white;
-            padding: 20px 40px;
-            border-radius: 50px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            display: inline-block;
+        .btn {
+            background: #bc13fe;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 0 15px #bc13fe;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: scale(1.1);
+            background: #ff00de;
+        }
+
+        /* Modal / Gizli Bölümler */
+        .hidden-section {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
+            justify-content: center;
+            align-items: center;
+            z-index: 200;
+        }
+
+        .yox-btn {
+            background: #444;
             position: relative;
         }
 
-        .message-box::after {
-            content: '';
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-left: 15px solid transparent;
-            border-right: 15px solid transparent;
-            border-bottom: 15px solid white;
-        }
-
-        h1 {
-            color: #d63384;
-            margin: 0;
-            font-size: 2.5rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
-        }
-
-        p {
-            color: #666;
-            margin-top: 15px;
-            font-weight: bold;
+        .final-text {
+            color: #ff00de;
+            font-size: 1.4rem;
+            text-align: center;
+            line-height: 1.5;
+            text-shadow: 0 0 10px #ff00de;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="bear-container">
-            🧸
+    <div id="heart-box"></div>
+
+    <div class="frame" id="screen1">
+        <img src="https://i.ibb.co/FbMjZyLn/image.png" class="user-photo" alt="Gözəlim">
+        <h2>Sene soyuğ davrandığım üçün bağışla</h2>
+        <button class="btn" onclick="goStep2()">Buna Bas</button>
+    </div>
+
+    <div class="hidden-section" id="screen2">
+        <div class="frame">
+            <h2>Bağışladın?</h2>
+            <div style="display:flex; gap:10px; justify-content:center;">
+                <button class="btn" onclick="goFinal()">He</button>
+                <button class="btn yox-btn" id="yoxBtn" onmouseover="escape()">Yox</button>
+            </div>
         </div>
-        <br>
-        <div class="message-box">
-            <h1>Aydan Barışağ?</h1>
+    </div>
+
+    <div class="hidden-section" id="screen3">
+        <div class="frame">
+            <div class="final-text">
+                Teşekkürler Yaxşıkı varsan 💞<br>
+                <span style="font-size: 1rem; color: #888;">(birde küs yatma)</span>
+            </div>
         </div>
-        <p>He??</p>
     </div>
 
     <script>
+        // Arka plan kalpleri oluştur
         function createHeart() {
             const heart = document.createElement('div');
-            heart.classList.add('heart');
-            heart.innerHTML = '❤️';
+            heart.className = 'heart';
+            heart.innerHTML = '💜';
             heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
-            heart.style.fontSize = Math.random() * 20 + 15 + 'px';
-            document.body.appendChild(heart);
+            heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+            document.getElementById('heart-box').appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }
+        setInterval(createHeart, 200);
 
-            setTimeout(() => {
-                heart.remove();
-            }, 5000);
+        // Ekran geçişleri
+        function goStep2() {
+            document.getElementById('screen1').style.display = 'none';
+            document.getElementById('screen2').style.display = 'flex';
         }
 
-        setInterval(createHeart, 300);
+        function goFinal() {
+            document.getElementById('screen2').style.display = 'none';
+            document.getElementById('screen3').style.display = 'flex';
+        }
+
+        // Yox butonu kaçış fonksiyonu
+        function escape() {
+            const btn = document.getElementById('yoxBtn');
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 50);
+            
+            btn.style.position = 'fixed';
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+            btn.innerText = "Error 404! 🤣";
+        }
+
+        // Sağ tık engelleme
+        document.addEventListener('contextmenu', e => e.preventDefault());
     </script>
 </body>
 </html>
+
